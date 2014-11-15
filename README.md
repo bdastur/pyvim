@@ -4,3 +4,8 @@ pyvim
 Repository for vim configurations and plugins for vim as a python editor.
 ---------------------------------------------------------------------------
 
+Plugins:
+1. Pathogen
+2. NerdTree
+3. TagList
+4. python-mode
