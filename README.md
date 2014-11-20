@@ -11,4 +11,4 @@ Plugins:
 * 4. python-mode
 
 More details and screenshots can be looked at:
-http://eat-code-sleep.blogspot.com/2014/11/vim-on-steroids.html
+http://behzaddastur.blogspot.com/2014/11/vim-on-steroids.html
