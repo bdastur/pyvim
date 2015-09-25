@@ -83,8 +83,8 @@ map .nu! :set nu!<CR>
 " ,r - for right pane
 " ,<UP> - for Upper pane
 " ,<Down> - for Down pane
-map <silent>,l <C-w>h
-map <silent>,r <C-w>l
+map <silent>,<Left> <C-w>h
+map <silent>,<Right> <C-w>l
 map <silent>,<Up> <C-w>k
 map <silent>,<Down> <C-w>j
 
