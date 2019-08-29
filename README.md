@@ -4,6 +4,9 @@ pyvim
 Repository for vim configurations and plugins for vim as a python editor.
 --------------------------------------------------------------------------
 
+Useful vim tools and plugins:
+* [vim bootstrap](http://vim-bootstrap.com/) .vimrc generator. 
+
 Plugins:
 * 1. Pathogen
 * 2. NerdTree
