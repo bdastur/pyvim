@@ -29,3 +29,9 @@ example:
 ```
 git clone https://github.com/Xuyuanp/nerdtree-git-plugin.git ~/.config/nvim/bundle/nerdtree-git-plugin
 ```
+
+Snippets:
+Install vim-snipmate
+https://github.com/garbas/vim-snipmate
+
+- make sure snippets are in ./vim/snippets folder

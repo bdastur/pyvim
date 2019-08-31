@@ -37,6 +37,62 @@ set showmatch
 set mat=2
 set nu!
 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Install vim plug if not already.
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  "autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Install pathogen plugin if not already.
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if empty(glob('~/.vim/autoload/pathogen.vim'))
+  silent !curl -LSso ~/.vim/autoload/pathogen.vim --create-dirs https://tpo.pe/pathogen.vim
+endif
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Install vim plugins using plug
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+call plug#begin('~/.vim/plugged')
+" Declare the list of plugins.
+"Plug 'autozimu/LanguageClient-neovim', {
+"    \ 'branch': 'next',
+"    \ 'do': 'bash install.sh',
+"    \ }
+" (Optional) Multi-entry selection UI.
+Plug 'junegunn/fzf'
+
+"File Navigation
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
+"Cool status bar.
+Plug 'vim-airline/vim-airline'
+
+"Snippets management
+Plug 'tomtom/tlib_vim'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'garbas/vim-snipmate'
+Plug 'honza/vim-snippets'
+
+"Python autocomplete
+Plug 'davidhalter/jedi-vim'
+
+" List ends here. Plugins become visible to Vim after this call.
+call plug#end()
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Install plugins using pathogen.
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set pathogen.
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -47,38 +103,62 @@ function PathogenConfig()
     syntax on
 endfunction
 
+call PathogenConfig()
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Enable nerdtree 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function NERDTreeConfig()
     "NERDTree plugin Configuration
-    ""Map Function key F2 to open/close navigation window.
-    map <F2> :NERDTreeToggle<CR>
+    " Map ,n to open/close navigation window. <silent>,<Left> <C-w>h
+    map ,n :NERDTreeToggle<CR>
     let g:NERDTreeChDirMode=2
     let g:NERDTreeIgnore=['\.vim$', '\~$', '\.pyc$', '\.swp$']
     let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$',  '\~$']
 endfunction
 
-function TaglistConfig()
-    "Taglist Pluggin confiuration
-    let Tlist_Ctags_Cmd = "/Users/bdastur/CODE/CTAGS/ctags-5.8/ctags"
-    map <F3> :TlistToggle<CR>
-    let g:Tlist_Use_Right_Window = 1
-    let g:Tlist_GainFocus_On_ToggleOpen = 1
-    let g:Tlist_Enable_Fold_Column = 1
-    let g:Tlist_Exit_OnlyWindow = 1
+call NERDTreeConfig()
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Enable ctrlp.vim 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function CtrlpConfig()
+    " ctrlp plugin configuration.
+    " Run at Vim's command line :helptags ~/.vim/bundle/ctrlp.vim/doc
+    set runtimepath^=~/.vim/bundle/ctrlp.vim
 endfunction
 
+call CtrlpConfig()
 
-call PathogenConfig()
-call NERDTreeConfig()
-call TaglistConfig()
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Enable LanguageClient
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+func LanguageClientConfig()
+    set runtimepath+=~/.vim-plugins/LanguageClient-neovim
+    let g:LanguageClient_serverCommands = {
+    \ 'python': ['/Users/behzad.dastur/pyenv/py3env/bin/pyls'],
+    \ }
+    let g:LanguageClient_autoStart = 1
+    let g:LanguageClient_autoStop = 1
+    let g:LanguageClient_changeThrottle = 0.5
+endfunction
+
+call LanguageClientConfig()
 
 
-"Toggle line numbers
-map .nu :set nu<CR>
-map .nu! :set nu!<CR>
 
+"""""""""""""""""""""""""""""""""""
+" maps
+"""""""""""""""""""""""""""""""""""
+:let mapleader = ","
+" Toggle line numbers
+map <leader>nu :set nu<CR>
+map <leader>nu! :set nu!<CR>
 
 " Viewport Controls
-" ie moving between split panes
+" " ie moving between split panes
 " ,l - for left pane
 " ,r - for right pane
 " ,<UP> - for Upper pane
@@ -92,8 +172,13 @@ map <silent>,<Down> <C-w>j
 "By default do not show line numbers.
 set nu!
 
-""""""""""""""""""""""""""""""""""""""""
-" pylint, pep8, pyflakes configs.
-""""""""""""""""""""""""""""""""""""""""
-let g:pymode_lint_ignore = "E265,W391,E303"
+"Matchit. https://www.vim.org/scripts/script.php?script_id=39
+"python_match.vim: https://www.vim.org/scripts/script.php?script_id=386
+" Manual install:
+" mkdir -p ~/.vim/plugin
+" cp matchit.vim ~/.vim/plugin/.; cp python_match.vim ~/.vim/plugin/.
+source ~/.vim/plugin/matchit.vim
+source ~/.vim/plugin/python_match.vim
+:let loaded_matchit = 1
 
+au BufNewFile postmortem-*.md 0r ~/postmortem-templates/templates/postmortem-template-srebook.md
