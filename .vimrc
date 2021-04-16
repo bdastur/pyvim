@@ -168,6 +168,8 @@ map <silent>,<Right> <C-w>l
 map <silent>,<Up> <C-w>k
 map <silent>,<Down> <C-w>j
 
+"Cleanup whitespaces
+map <leader>ws! :%s/\s\+$//e
 
 "By default do not show line numbers.
 set nu!
