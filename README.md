@@ -10,7 +10,7 @@ Useful vim tools and plugins:
 * [Language client](https://github.com/autozimu/LanguageClient-neovim)
 * [Minimalist plugin manager vim plug](https://github.com/junegunn/vim-plug)
 * [Nerdtree git plugin] (https://github.com/Xuyuanp/nerdtree-git-plugin)
-
+* [Vim Vundle plugin manager](https://github.com/VundleVim/Vundle.vim)
 
 
 Plugins:

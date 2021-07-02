@@ -96,6 +96,9 @@ call vundle#begin()
     " Snippets plugin (https://github.com/honza/vim-snippets)
     Plugin 'honza/vim-snippets'
 
+    " Python autocomplete (https://github.com/davidhalter/jedi-vim)
+    Plugin 'davidhalter/jedi-vim'
+
 call vundle#end()
 filetype plugin indent on    " required
 
@@ -122,3 +125,13 @@ function SnipmateConfig()
 endfunction
 
 call SnipmateConfig()
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" jedi-vim configuration
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function JediVimConfig()
+    let g:jedi#auto_initialization = 1
+    let g:jedi#show_call_signatures = "1"
+endfunction
+
+call JediVimConfig()
