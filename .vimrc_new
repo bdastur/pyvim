@@ -63,6 +63,12 @@ map <leader>ws! :%s/\s\+$//e
 "By default do not show line numbers.
 set nu!
 
+"Map for (visible) cursor column.
+" Great for reading yaml files.
+map <leader>cu :set cuc<CR>
+map <leader>cu! :set nocuc<CR>
+:hi CursorColumn ctermbg=10
+
 """"""""""""""""""""""""""""""""""""""""""""
 " https://vimtricks.com/p/highlight-specific-lines/
 " Highlight specific lines.
