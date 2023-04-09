@@ -63,23 +63,10 @@ map <leader>ws! :%s/\s\+$//e
 "By default do not show line numbers.
 set nu!
 
-"Map for (visible) cursor column.
-" Great for reading yaml files.
+"Map for cursor column.
 map <leader>cu :set cuc<CR>
 map <leader>cu! :set nocuc<CR>
 :hi CursorColumn ctermbg=10
-
-""""""""""""""""""""""""""""""""""""""""""""
-" https://vimtricks.com/p/highlight-specific-lines/
-" Highlight specific lines.
-" define line highlight color
-highlight LineHighlight ctermbg=lightblue guibg=lightblue
-" highlight the current line (mapping)
-nnoremap <silent> <Leader>hl :call matchadd('LineHighlight', '\%'.line('.').'l')<CR>
-" clear all the highlighted lines (mapping)
-nnoremap <silent> <Leader>nh :call clearmatches()<CR>
-"""""""""""""""""""""""""""""""""""""""""""""
-
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 " Status line
@@ -128,6 +115,8 @@ call PathogenConfig()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vundle plugin manager
+" If you add a new plugin, open vi and run :PluginInstall 
+" to install a new plugin
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -152,6 +141,12 @@ call vundle#begin()
 
     " VIM Powerline status bar.
     Plugin 'Lokaltog/vim-powerline'
+
+    " VIM Java autocomplete plugin.
+    Plugin 'artur-shaik/vim-javacomplete2'
+
+    " VIM Terraform plugin (https://github.com/hashivim/vim-terraform)
+    Plugin 'hashivim/vim-terraform'
 
 call vundle#end()
 filetype plugin indent on    " required
@@ -189,3 +184,6 @@ function JediVimConfig()
 endfunction
 
 call JediVimConfig()
+
+" For vim-javacomplete2 plugin
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
